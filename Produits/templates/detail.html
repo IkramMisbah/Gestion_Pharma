@@ -1,0 +1,329 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{%block produit%}
+{%if messages %}
+<ul class='messages'>
+   {%for message in messages%}
+       <li {% if message.tags%} class='{message.tags}' {%endif%} style='color:green;'>
+           
+       </li>
+   {%endfor%}
+</ul>
+
+{%endif%}
+{% if n.quantite == 0 %}
+<div class="product-status out-of-stock">
+  <h3>Le produit {{n.name}} n'est pas disponible</h3>
+</div>
+<br>
+<br>
+  <a href="{% url 'ajout' %}">
+    <button  class="wow-button"><i class="bi bi-plus-square-fill"></i> Ajouter {{n.name}}</button>
+  </a>
+
+
+{% elif n.quantite <= 5 %}
+<div class="product-status low-stock">
+  <h3>Le stock du produit {{n.name}} est bas</h3>
+</div>
+<br>
+<br>
+  <a href="{% url 'ajoutvente' n.id %}">
+    <button  class="wow-button" ><i class="bi bi-plus-square-fill"></i> Vendre {{n.name}}</button>
+  </a>
+
+
+{% else %}
+<div class="product-status available">
+  <h3>Le produit peut être vendu</h3>
+</div>
+<br>
+<br>
+  <a href="{% url 'ajoutvente' n.id %}">
+    <button  class="wow-button" ><i class="bi bi-plus-square-fill"></i> Vendre {{n.name}}</button>
+  </a>
+
+{% endif %}
+
+
+
+<br>
+<br>
+
+
+<h3 style="font-family: 'Arial', sans-serif; font-size: 1.5rem; color: #f1f1f1; border-bottom: 2px solid #f1f1f1; padding-bottom: 10px; margin-bottom: 20px; transition: color 0.3s ease;">
+  Les détails du produit {{ n.name }} :
+</h3>
+
+
+<div class="products-area-wrapper tableView">
+  <style>
+
+    /* Style du bouton avec la classe wow-button */
+    .wow-button {
+      background: linear-gradient(135deg, #007BFF, #00BFFF); /* Dégradé bleu */
+      color: white; /* Texte en blanc */
+      font-size: 16px;
+      font-weight: 600;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 50px; /* Coins arrondis pour un look moderne */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.4s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .wow-button i {
+      margin-right: 10px; /* Espacement entre l'icône et le texte */
+      font-size: 18px; /* Taille de l'icône */
+    }
+    
+    /* Effet de survol */
+    .wow-button:hover {
+      background: linear-gradient(135deg, #00BFFF, #007BFF); /* Inversement du dégradé pour l'effet de survol */
+      transform: translateY(-3px); /* Légère élévation du bouton au survol */
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.5); /* Ombre portée pour ajouter de la profondeur */
+    }
+    
+    /* Effet au focus (lorsque le bouton est activé) */
+    .wow-button:focus {
+      outline: none; /* Enlève le contour par défaut */
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.8); /* Effet lumineux autour du bouton */
+    }
+     
+.product-status {
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* When the product is out of stock */
+.out-of-stock {
+  background: linear-gradient(135deg, #FF4444, #FF7F7F); /* Dégradé rouge */
+  border: 2px solid #FF2D2D;
+  transform: scale(1.05);
+  animation: pulse 1.5s infinite;
+}
+
+.out-of-stock h3 {
+  color: #F0FFFF;
+  font-weight: bold;
+}
+
+.out-of-stock .action-button {
+  background-color: #FF2D2D;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+}
+
+.out-of-stock .action-button:hover {
+  transform: scale(1.1);
+}
+
+/* When the product is low in stock */
+.low-stock {
+  background: linear-gradient(135deg, #F9D423, #FF4E50); /* Dégradé jaune-orange */
+  border: 2px solid #F9D423;
+  transform: scale(1.05);
+  animation: pulse 1.5s infinite;
+}
+
+.low-stock h3 {
+  color: #F0FFFF;
+  font-weight: bold;
+}
+
+.low-stock .action-button {
+  background-color: #FF9F00;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+}
+
+.low-stock .action-button:hover {
+  transform: scale(1.1);
+}
+
+/* When the product is available for sale */
+.available {
+  background: linear-gradient(135deg, #28A745, #80E27E); /* Dégradé vert */
+  border: 2px solid #28A745;
+  transform: scale(1.05);
+}
+
+.available h3 {
+  color: #F0FFFF;
+  font-weight: bold;
+}
+
+.available .action-button {
+  background-color: #28A745;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+}
+
+.available .action-button:hover {
+  transform: scale(1.1);
+}
+
+
+/* Pulse effect for out of stock and low stock */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+  .button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weigt:bold;
+    text-align:center;
+    color:white;
+
+    }
+ 
+
+  .red {
+    background-color:red;
+    }
+  .orange {
+    background-color:orange;
+    }
+  .green {
+    background-color:green;
+    }
+  </style>
+
+
+    <div class="products-header">
+      <div class="product-cell image">
+        name
+        <button class="sort-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+        </button>
+      </div>
+      <div class="product-cell category">Category<button class="sort-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+        </button></div>
+      <div class="product-cell status-cell">quantite<button class="sort-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+        </button></div>
+      <div class="product-cell sales">price<button class="sort-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+        </button></div>
+      <div class="product-cell stock">Date Ajout<button class="sort-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+        </button></div>
+      <div class="product-cell price">Date Expiration<button class="sort-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+        </button></div>
+        <div class="product-cell price">Description<button class="sort-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+        </button></div>
+    </div>
+    
+      <div class="products-row" id="produit-{{ n.id }}">
+      
+      <button class="cell-more-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      </button>
+        <div class="product-cell image">
+          {% if n.image %}
+                <img src="{{ n.image.url }}" alt="image actuelle" style="max-width:100px; max-height:100px;">
+            {% else %}
+                <img src="{% static 'images/default_image.jpeg' %}" alt="Image par défaut" style="max-width:100px; max-height:100px;">
+            {% endif %}
+            <span>{{ n.name }}</span>
+        </div>
+      <div class="product-cell category"><span class="cell-label">Category:</span>{{n.category}}</div>
+      <div class="product-cell status-cell">
+        <span class="cell-label">Status:</span>
+        <span class="status active"> <button class="button {{n.statut_quantite}}"></button> {{n.quantite}}</span>
+      </div>
+      <div class="product-cell sales"><span class="cell-label">Prix:</span>{{n.price}} </div>
+      <div class="product-cell stock"><span class="cell-label">Date Ajout:</span>{{n.date_ajout}}</div>
+      <div class="product-cell price"><span class="cell-label">Date Expiration:</span>{{n.date_expiration}}</div>
+      <div class="product-cell price"><span class="cell-label">Description:</span>{{n.description}}</div>
+      
+        
+
+        <!-- <a class="btn btn-danger"><i class="bi bi-trash3 delete-button" data-id="{{ n.id }}"></i></a> -->
+      </div>
+    </div>
+    
+</div>
+
+
+<!-- Jquery -->
+<!-- bootsratp -->
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Script pour supprimer -->
+
+
+<script>
+  // Lorsque le document est complètement chargé, cette fonction sera exécutée
+  $(document).ready(function() {
+      
+      // Lorsqu'un élément ayant la classe 'delete-button' est cliqué
+      $('.delete-button').on('click', function() {
+          
+          // Récupérer l'ID du produit à partir de l'attribut 'data-id' du bouton cliqué
+          var produitId = $(this).data('id');
+
+          // Effectuer une requête AJAX pour envoyer une demande de suppression au serveur
+          $.ajax({
+              url: '/supprimer/' + produitId + '/',  // URL de la route qui gère la suppression, incluant l'ID du produit
+              type: 'POST',  // Type de requête : POST (envoi de données)
+              data: {
+                  // Envoi du token CSRF pour la sécurité
+                  'csrfmiddlewaretoken': '{{ csrf_token }}'
+              },
+              success: function(response) {
+                  // Si la suppression est réussie (réponse du serveur avec un champ 'success' à vrai)
+                  if (response.success) {
+                      // Supprimer l'élément HTML correspondant au produit (par son ID 'produit-<produitId>')
+                      $('#produit-' + produitId).remove();
+
+                      // Afficher le modal de succès
+                      $('#successModal').modal('show');
+                  } else {
+                      // Si la suppression a échoué, afficher un message d'alerte
+                      alert('Erreur lors de la suppression.');
+                  }
+              },
+              error: function() {
+                  // Si la requête échoue (par exemple, un problème de serveur), afficher un message d'erreur
+                  alert('Erreur lors de la suppression.');
+              }
+          });
+      });
+  });
+</script>
+
+
+{%endblock produit%}

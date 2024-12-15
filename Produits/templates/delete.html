@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block produit %}
+
+
+<div class="products-area-wrapper tableView">
+    <div class="app-content">
+        <div class="container">
+            <div class="row">
+
+          
+                <div class="col" style="color: aliceblue;">
+                    {% if user.is_superuser %}
+                    <form action="{% url 'delete' object.pk %}" method="post">
+                        {% csrf_token %}
+                        <h1 class="confirmation-message">
+                            Vous êtes sur le point de supprimer un produit, voulez-vous continuer ?
+                        </h1>
+                        
+                        <div class="confirmation-buttons">
+                            <a class="btn btn-custom-cancel" href="{% url 'home' %}">
+                                <i class="bi bi-x-circle"></i> Annuler
+                            </a>
+                            
+                            <button class="btn btn-custom-confirm">
+                                <i class="bi bi-check-circle"></i> Confirmer
+                            </button>
+                        </div>
+                        
+                        <style>
+                            .confirmation-message {
+                                color: white;
+                                font-size: 2rem;
+                                font-weight: 600;
+                                text-align: center;
+                                margin-bottom: 20px;
+                            }
+                        
+                            .confirmation-buttons {
+                                text-align: center;
+                                margin-top: 30px;
+                            }
+                        
+                            .confirmation-buttons .btn {
+                                font-size: 1.2rem;
+                                padding: 12px 30px;
+                                border-radius: 30px;
+                                margin: 10px;
+                                transition: all 0.3s ease;
+                            }
+                        
+                            .btn-custom-cancel {
+                                background-color: #f39c12;
+                                color: white;
+                                border: 2px solid #f39c12;
+                            }
+                        
+                            .btn-custom-confirm {
+                                background-color: #e74c3c;
+                                color: white;
+                                border: 2px solid #e74c3c;
+                            }
+                        
+                            .btn:hover {
+                                opacity: 0.9;
+                                transform: scale(1.05);
+                            }
+                        
+                            .btn i {
+                                margin-right: 8px;
+                            }
+                        </style>
+                        
+                    </form>
+                    {% else %}
+                    <h3 class="error-message">
+                        Désolé, pour supprimer un produit, vous devez être un Administrateur.<br>
+                        <i>Contactez-le :</i>
+                    </h3>
+                    
+                    <div class="contact-buttons">
+                        <a class="btn btn-custom-email" href="mailto:ikrammisbah65@gmail.com">
+                            <i class="bi bi-envelope"></i> Par mail
+                        </a><br><br>
+                    
+                        <a class="btn btn-custom-whatsapp" href="https://wa.me/+212762153520">
+                            <i class="bi bi-whatsapp"></i> Par WhatsApp
+                        </a><br><br>
+                    
+                        <a class="btn btn-custom-back" href="{% url 'home' %}">
+                            <i class="bi bi-arrow-left-circle"></i> Revenir
+                        </a>
+                    </div>
+                    
+                    <style>
+                        .error-message {
+                            color: white;
+                            font-size: 1.3rem;
+                            text-align: center;
+                            font-weight: 500;
+                            margin-bottom: 20px;
+                        }
+                    
+                        .error-message i {
+                            font-style: italic;
+                            color: #f1c40f;
+                        }
+                    
+                        .contact-buttons {
+                            text-align: center;
+                            margin-top: 20px;
+                        }
+                    
+                        .contact-buttons .btn {
+                            font-size: 1rem;
+                            padding: 12px 25px;
+                            border-radius: 30px;
+                            margin: 10px 0;
+                            transition: all 0.3s ease;
+                        }
+                    
+                        .btn-custom-email {
+                            background-color: #3498db;
+                            color: white;
+                            border: 2px solid #3498db;
+                        }
+                    
+                        .btn-custom-whatsapp {
+                            background-color: #25d366;
+                            color: white;
+                            border: 2px solid #25d366;
+                        }
+                    
+                        .btn-custom-back {
+                            background-color: #e74c3c;
+                            color: white;
+                            border: 2px solid #e74c3c;
+                        }
+                    
+                        .btn:hover {
+                            opacity: 0.9;
+                            transform: scale(1.05);
+                        }
+                    </style>
+                    
+    
+                    {% endif %}
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+
+
+{% endblock produit %}

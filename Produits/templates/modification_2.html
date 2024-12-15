@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modification des Produits</title>
+    <link rel="stylesheet" href="{% static 'style1.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome.min.css' %}">
+</head>
+<body>
+
+    <div class="container-fluid px-4 py-5 mx-auto">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-8 col-lg-9 col-md-10 col-12">
+                <div class="text-center mb-4">
+                    <h3 class="text-primary">Modification des Produits</h3>
+                    <p class="blue-text">Veuillez noter que tous les champs sont obligatoires <span class="text-danger">*</span></p>
+                </div>
+                <div class="card shadow-lg rounded">
+                    <h5 class="card-header text-center">Pharmacie Projet</h5>
+                    <div class="card-body">
+                        <form class="form-card" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            {% if messages %}
+                            <div class="alert alert-danger">
+                                <ul>
+                                    {% for message in messages %}
+                                        <li>{{ message }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %}
+
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Nom du produit <span class="text-danger">*</span></label>
+                                    {{ form.name }}
+                                    <div class="text-danger">{{ form.name.errors }}</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="category" class="form-label">Catégorie <span class="text-danger">*</span></label>
+                                    {{ form.category }}
+                                    <div class="text-danger">{{ form.category.errors }}</div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label for="price" class="form-label">Prix du produit <span class="text-danger">*</span></label>
+                                    {{ form.price }}
+                                    <div class="text-danger">{{ form.price.errors }}</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="quantite" class="form-label">Quantité <span class="text-danger">*</span></label>
+                                    {{ form.quantite }}
+                                    <div class="text-danger">{{ form.quantite.errors }}</div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label for="date_expiration" class="form-label">Date d'expiration <span class="text-danger">*</span></label>
+                                    {{ form.date_expiration }}
+                                    <div class="text-danger">{{ form.date_expiration.errors }}</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="image" class="form-label">Image du produit <span class="text-danger">*</span></label>
+                                    {{ form.image }}
+                                    <div class="text-danger">{{ form.image.errors }}</div>
+                                    {% if form.instance.image %}
+                                        <div class="mt-2">
+                                            <label>Image actuelle :</label>
+                                            <img src="{{ form.instance.image.url }}" alt="Image actuelle" style="max-width: 150px; max-height: 150px;">
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="description" class="form-label">Description du produit <span class="text-danger">*</span></label>
+                                {{ form.description }}
+                                <div class="text-danger">{{ form.description.errors }}</div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">Enregistrer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+</body>
+</html>
+
+<style>
+    .text-center {
+        font-family: Arial, sans-serif;
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 50px;
+        padding: 12px 30px;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+    .blue-text {
+        color: #007bff;
+    }
+</style>

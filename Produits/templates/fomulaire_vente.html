@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajout des données</title>
+    
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome.min.css' %}">
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+</head>
+<style>
+    /* Reset CSS for consistency */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f2f5;
+        color: #555;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 1100px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 600;
+        color: #007bff;
+        margin-bottom: 1.5rem;
+    }
+
+    .card {
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control-label {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+        color: #333;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+        outline: none;
+    }
+
+    .btn {
+        padding: 12px 25px;
+        background-color: #007bff;
+        color: #fff;
+        font-weight: 600;
+        font-size: 1rem;
+        border-radius: 50px;
+        border: none;
+        width: 100%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 20px;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-back {
+        background-color: #28a745;
+        color: white;
+        width: auto;
+        margin-top: 1rem;
+        padding: 10px 20px;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+        background-color: #218838;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .error-message {
+        color: red;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .blue-text {
+        color: #007bff;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .container {
+            padding: 20px;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+        }
+
+        .form-group input, .form-group select {
+            padding: 10px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h3>Vente de produits</h3>
+
+    <div class="card">
+        <p class="text-center blue-text">
+            Veuillez noter que tous les champs sont obligatoires.
+        </p>
+
+        <a href="{% url 'home' %}">
+            <button class="btn btn-back">Revenir</button>
+        </a>
+
+        {% if message %}
+            <p class="error-message">{{ message }}</p>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label class="form-control-label">Nom du client<span class="text-danger"> *</span></label>
+                {{ form.customer }}
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label">Quantité<span class="text-danger"> *</span></label>
+                {{ form.quantite }}
+            </div>
+
+            <button type="submit" class="btn">Effectuez la vente</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

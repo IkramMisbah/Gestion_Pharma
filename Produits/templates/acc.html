@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{%load static%}
+
+{% block title %}
+  Page Principale
+{% endblock title %}
+
+
+
+
+{% block produit %}
+
+    
+<style>
+    .container {
+        display: inline-block;
+        position: relative;
+    }
+    .container .text {
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+        position: absolute;
+        text-align: center;
+        font-family: Georgia;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        top: 15%;
+        color: white;
+        width: 70%;
+    }
+</style>
+<div class="container">
+    <img src="{% static 'images/page_acceuil.jpeg' %}">
+    <div class="text">
+        <h1 >Bienvenue dans votre pharmacie digitale</h1>
+       <p >
+        Notre application vous offre une gestion optimisée de vos médicaments et de vos stocks, facilitant ainsi le suivi des prescriptions, le contrôle des inventaires et la gestion des produits. 
+        Que vous soyez un professionnel de santé ou un utilisateur à la recherche de produits pharmaceutiques, notre plateforme vous permet d'accéder rapidement à un catalogue complet, tout en vous garantissant une expérience fluide et sécurisée. 
+        Découvrez une nouvelle manière de gérer vos achats, vos stocks, et vos prescriptions, le tout à portée de main.
+      </p>
+    </div>
+</div>
+{% endblock produit %}

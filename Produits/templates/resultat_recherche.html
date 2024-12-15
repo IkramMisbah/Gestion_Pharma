@@ -1,0 +1,180 @@
+<!-- si non il n y aura pas de style e -->
+{% extends 'base.html' %}
+{% load static %}
+
+{%block produit%}
+{%if messages %}
+<ul class='messages'>
+   {%for message in messages%}
+       <li {% if message.tags%} class='{message.tags}' {%endif%} style='color:green;'>
+           
+       </li>
+   {%endfor%}
+</ul>
+
+{%endif%}
+<h1 style="color: white;">Résultat de la recheche : </h1>
+
+
+
+<div class="products-area-wrapper tableView">
+  <style>
+  .button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weigt:bold;
+    text-align:center;
+    color:white;
+
+    }
+
+  .red {
+    background-color:red;
+    }
+  .orange {
+    background-color:orange;
+    }
+  .green {
+    background-color:green;
+    }
+  </style>
+
+
+    <div class="products-header">
+      <div class="product-cell image">
+        name
+        <button class="sort-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+        </button>
+      </div>
+      <div class="product-cell category">Category<button class="sort-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+        </button></div>
+      <div class="product-cell status-cell">quantite<button class="sort-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+        </button></div>
+      <div class="product-cell sales">price<button class="sort-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+        </button></div>
+      <div class="product-cell stock">Date Ajout<button class="sort-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+        </button></div>
+      <div class="product-cell price">Date Expiration<button class="sort-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+        </button></div>
+        <div class="product-cell price">Actions<button class="sort-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+        </button></div>
+    </div>
+
+
+    {%if donnees%}
+    {% for n in donnees%}
+      <div class="products-row" id="produit-{{ n.id }}">
+      
+      <button class="cell-more-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      </button>
+        <div class="product-cell image">
+          {% if n.image %}
+                <img src="{{ n.image.url }}" alt="image actuelle" style="max-width:100px; max-height:100px;">
+            {% else %}
+                <img src="{% static 'images/default_image.jpeg' %}" alt="Image par défaut" style="max-width:100px; max-height:100px;">
+            {% endif %}
+            <span>{{ n.name }}</span>
+        </div>
+      <div class="product-cell category"><span class="cell-label">Category:</span>{{n.category}}</div>
+      <div class="product-cell status-cell">
+        <span class="cell-label">Status:</span>
+        <span class="status active"> <button class="button {{n.statut_quantite}}"></button> {{n.quantite}}</span>
+      </div>
+      <div class="product-cell sales"><span class="cell-label">Prix:</span>{{n.price}} </div>
+      <div class="product-cell stock"><span class="cell-label">Date Ajout:</span>{{n.date_ajout}}</div>
+      <div class="product-cell price"><span class="cell-label">Date Expiration:</span>{{n.date_expiration}}</div>
+      <div class="product-cell price"><span class="cell-label">
+        Actions :</span>
+        <a href="{% url 'modifier' n.id%}" class="btn btn-info"> <i class="bi bi-pencil-square"></i></a> 
+
+        <a class="btn btn-danger"> <i class="bi bi-trash3 delete-button" data-id="{{ n.id }}"></i></a> 
+        <div class="modal" id="successModal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <!-- Titre du modal -->
+                      <h5 class="modal-title">Succès</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body" style="color:black">
+                      <!-- Message affiché dans le modal lors de la suppression réussie -->
+                      <p>Le produit a été supprimé avec succès.</p>
+                  </div>
+                  <div class="modal-footer">
+                      <!-- Bouton pour fermer le modal -->
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+        <a href="{% url 'detail' n.pk%}" class="btn btn-primary"> <i class="bi bi-info"></i></a> 
+
+        <!-- <a class="btn btn-danger"><i class="bi bi-trash3 delete-button" data-id="{{ n.id }}"></i></a> -->
+      </div>
+    </div>
+    {% endfor %}
+</div>
+
+{%else%}
+<h3 style='color:blue'>Aucun résulat n'a été trouvé !</h3>
+{%endif%}
+<!-- Jquery -->
+<!-- bootsratp -->
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Script pour supprimer -->
+
+
+<script>
+  // Lorsque le document est complètement chargé, cette fonction sera exécutée
+  $(document).ready(function() {
+      
+      // Lorsqu'un élément ayant la classe 'delete-button' est cliqué
+      $('.delete-button').on('click', function() {
+          
+          // Récupérer l'ID du produit à partir de l'attribut 'data-id' du bouton cliqué
+          var produitId = $(this).data('id');
+
+          // Effectuer une requête AJAX pour envoyer une demande de suppression au serveur
+          $.ajax({
+              url: '/supprimer/' + produitId + '/',  // URL de la route qui gère la suppression, incluant l'ID du produit
+              type: 'POST',  // Type de requête : POST (envoi de données)
+              data: {
+                  // Envoi du token CSRF pour la sécurité
+                  'csrfmiddlewaretoken': '{{ csrf_token }}'
+              },
+              success: function(response) {
+                  // Si la suppression est réussie (réponse du serveur avec un champ 'success' à vrai)
+                  if (response.success) {
+                      // Supprimer l'élément HTML correspondant au produit (par son ID 'produit-<produitId>')
+                      $('#produit-' + produitId).remove();
+
+                      // Afficher le modal de succès
+                      $('#successModal').modal('show');
+                  } else {
+                      // Si la suppression a échoué, afficher un message d'alerte
+                      alert('Erreur lors de la suppression.');
+                  }
+              },
+              error: function() {
+                  // Si la requête échoue (par exemple, un problème de serveur), afficher un message d'erreur
+                  alert('Erreur lors de la suppression.');
+              }
+          });
+      });
+  });
+</script>
+
+
+{%endblock produit%}

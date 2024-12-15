@@ -1,0 +1,64 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{% static 'styleFacture.css' %}">
+  <title>Facture Professionnelle</title>
+</head>
+<body>
+  <main class="invoice-container">
+    <header>
+      <img src="{% static 'images/logo.jpeg' %}" alt="Logo" class="logo">
+      <div class="company-info">
+        <h1>Pharmaci Bab Anassi</h1>
+        <p>Adresse : Rue ,Mohammed Zefzaf Ahl Leghlam, Anassi,Casablanca</p>
+        <p>Email : contact@pharmacieanassi.com</p>
+        <p>Téléphone: +212 06 572 28</p>
+      </div>
+    </header>
+    <section class="invoice-header">
+      <h2>Facture de Pharmacie</h2>
+      <p><strong>Date & Heure : </strong>{{sale_date}}</p>
+      <div class="client-details">
+        <p><strong>Facture pour : </strong>{{customer}}</p>
+        <p><strong>N° de facture : </strong>{{id}}</p>
+      </div>
+    </section>
+    <section class="invoice-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Produit</th>
+            <th>Qté</th>
+            <th>Prix Unitaire</th>
+            <th>Montant Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{produit}}</td>
+            <td>{{quantite}}</td>
+            <td>{{prix_unitaire}} DH</td>
+            <td>{{total_amount}} DH</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="invoice-footer">
+      <p><strong>Remarque : </strong>Les produits vendus ne sont ni échangés ni remboursés.</p>
+      <p>Pour tout souci, voir le vendeur.</p>
+      <p class="total"><strong>Total : </strong>{{total_amount}} DH</p>
+    </section>
+    <button id="print-button">Imprimer</button>
+  </main>
+  <script>
+    document.getElementById("print-button").addEventListener("click", function() {
+      window.print();
+    });
+  </script>
+</body>
+</html>
