@@ -21,17 +21,11 @@ Cette application a été conçue pour simplifier et automatiser les processus d
 - Fonctionnalité de recherche avancée pour retrouver facilement un médicament ou une transaction spécifique.
 - Filtres personnalisés pour analyser les ventes ou les stocks.
 
-### Gestion des clients
-- Création de fiches clients pour suivre les habitudes d'achat et personnaliser les services.
-- Historique des commandes pour chaque client.
 
-### Rapports et analyses
-- Génération de rapports sur les ventes, les stocks et les performances.
-- Visualisations graphiques pour aider à la prise de décision.
 
 ## Technologies utilisées
 - **Django (Backend)** : pour la gestion des données et des fonctionnalités métier.
-- **HTML/CSS/JavaScript (Frontend)** : pour des interfaces utilisateur attrayantes et interactives.
+- **HTML/CSS/JavaScript/Bootstrap (Frontend)** : pour des interfaces utilisateur attrayantes et interactives.
 - **SQLite/MySQL** : pour le stockage des données.
 - **Django ORM** : pour la gestion des bases de données.
 
@@ -95,8 +89,6 @@ L'application vise à simplifier la gestion quotidienne d'une pharmacie, réduir
 
 ---
 
-## 📽️ Tutoriels Vidéos  
-Retrouvez chaque étape du tutoriel sur notre chaîne YouTube. N'oubliez pas de **vous abonner**, de **liker**, et de **commenter** vos impressions. ❤️  
 
 ## 🚀 Ce que vous allez apprendre  
 À la fin de ce tutoriel, vous serez capable de :  
@@ -110,7 +102,7 @@ Retrouvez chaque étape du tutoriel sur notre chaîne YouTube. N'oubliez pas de 
 Vous avez des idées ou des suggestions ? Ouvrez une **issue** ou soumettez une **pull request** !  
 
 ## 📧 Contact  
-Pour toute question ou suggestion, laissez un commentaire sous les vidéos ou contactez-nous par email à [contact@pharmaapp.com](mailto:contact@pharmaapp.com).  
+Pour toute question ou suggestion,  contactez-nous : [tel:+212 762153520](mailto:ikrammisbah65@gmail.com).  
 
 ---
 
